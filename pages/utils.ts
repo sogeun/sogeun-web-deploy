@@ -1,14 +1,11 @@
-import {WebViewMessage} from './types';
+import { WebViewMessage } from "./types";
 
-export const sendMessage = <T>(
-  message: WebViewMessage<T>,
-) => {
+export const sendMessage = <T>(message: WebViewMessage<T>) => {
+  //@ts-ignore
+  if (window?.ReactNativeWebView) {
     //@ts-ignore
-    if (window?.ReactNativeWebView) {
-        //@ts-ignore
-        window.ReactNativeWebView.postMessage(JSON.stringify(message))
-
-    }
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+  }
 };
 
 export const parseWebMessage = <T>(webData: string) => {
