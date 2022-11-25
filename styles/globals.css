@@ -11,21 +11,31 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 button {
   border-style: none;
   background-color: transparent;
 }
 
+@font-face {
+  font-family: NotoSansCJK-KR;
+  src: url('/fonts/NotoSansCJK-KR-Bold.otf'); 
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: NotoSansCJK-KR;
+  src: url('/fonts/NotoSansCJK-KR-Regular.otf');
+  font-weight: 400;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: NotoSansCJK-KR, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;;
+  border: none;
+  box-sizing: border-box;
+}
+
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }
