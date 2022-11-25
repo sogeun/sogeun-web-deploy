@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEventHandler, useState } from "react";
 import styled from "styled-components";
-import Typo from "../../components/Typo";
-import { appTheme } from "../../constants/theme";
+import pages from "../../constants/pages";
 import { AuthTokenPayload, WebViewMessageType } from "../types";
 import { sendMessage } from "../utils";
 
@@ -18,9 +17,10 @@ const SignIn = () => {
     setPw(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
     // 로그인 과정 끝낸 후
-    router.push("/main");
+    router.push(pages.HOME);
     sendMessage<AuthTokenPayload>({
       type: WebViewMessageType.SIGN_IN,
       payload: {
