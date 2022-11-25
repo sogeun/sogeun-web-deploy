@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import { Fragment, PropsWithChildren, useEffect, useState } from "react";
-import { AuthTokenPayload, WebViewMessageType } from "../../types";
-import { parseWebMessage, sendMessage } from "../../utils";
+import pages from "../../constants/pages";
+import { AuthTokenPayload, WebViewMessageType } from "../../pages/types";
+import { parseWebMessage, sendMessage } from "../../pages/utils";
 
 const RNListener = ({ children }: PropsWithChildren) => {
   const [isSessionChecked, setIsSessionChecked] = useState(false);
@@ -15,9 +16,9 @@ const RNListener = ({ children }: PropsWithChildren) => {
           const { payload } = parseWebMessage<AuthTokenPayload>(webData);
           const { token } = payload;
           if (token) {
-            router.replace("/main");
+            router.replace(pages.HOME);
           } else {
-            router.replace("/signin");
+            router.replace(pages.SIGN_IN);
           }
           setIsSessionChecked(true);
           break;
