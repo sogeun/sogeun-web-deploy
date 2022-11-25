@@ -1,10 +1,10 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import RNListener from "../components/RNListener";
 import { ReactElement } from "react";
 import { NextPage } from "next";
 import { ThemeProvider } from "styled-components";
 import { appTheme } from "../constants/theme";
+import { GlobalStyle } from "../styles/globalStyle";
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<
   P,
@@ -28,6 +28,7 @@ function withWrapper(
   return function MyApp(props: AppPropsWithLayout) {
     return (
       <ThemeProvider theme={appTheme}>
+        <GlobalStyle />
         <RNListener>
           <MainComponent {...props} />
         </RNListener>

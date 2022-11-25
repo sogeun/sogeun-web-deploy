@@ -24,19 +24,30 @@ export enum FontType {
 
 export type FontWeightType = typeof fontWeights[keyof typeof fontWeights];
 
-const getTypo = (size: FontSizeType, weight: FontWeightType) => {
-  const { fontSize, lineHeight, fontWeight } = getFontTypo(size, weight);
-  return `font-size: ${fontSize}rem; line-height: ${lineHeight}rem; font-weight: ${fontWeight}`;
+const getTypo = (
+  size: FontSizeType,
+  weight: FontWeightType,
+  fontType = FontType.NOTO_SANS_CJK_KR
+) => {
+  const { fontFamily, fontSize, lineHeight, fontWeight } = getFontTypo(
+    size,
+    weight,
+    fontType
+  );
+  return `font-family: ${fontFamily}; font-size: ${fontSize}rem; line-height: ${lineHeight}rem; font-weight: ${fontWeight}`;
 };
 
 const getFontTypo: (
   size: FontSizeType,
-  weight: FontWeightType
+  weight: FontWeightType,
+  fontType?: FontType
 ) => {
+  fontFamily: FontType;
   fontSize: number;
   lineHeight: number;
   fontWeight: number;
-} = (size, weight) => {
+} = (size, weight, fontType = FontType.NOTO_SANS_CJK_KR) => {
+  const fontFamily = fontType;
   const fontWeight = weight;
   let fontSize = 1.6;
   let lineHeight = 2.4;
@@ -76,7 +87,7 @@ const getFontTypo: (
     default:
       break;
   }
-  return { fontSize, lineHeight, fontWeight };
+  return { fontFamily, fontSize, lineHeight, fontWeight };
 };
 
 const colors = {
