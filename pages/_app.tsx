@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import RNListener from "../components/RNListener";
 import { ReactElement } from "react";
 import { NextPage } from "next";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { appTheme } from "../constants/theme";
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<

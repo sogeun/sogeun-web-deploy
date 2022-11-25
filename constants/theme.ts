@@ -18,6 +18,10 @@ export const fontWeights = {
   BOLD: 700,
 };
 
+export enum FontType {
+  NOTO_SANS_CJK_KR = "NotoSansCJK-KR",
+}
+
 export type FontWeightType = typeof fontWeights[keyof typeof fontWeights];
 
 const getTypo = (size: FontSizeType, weight: FontWeightType) => {
@@ -102,8 +106,8 @@ const colors = {
 
 const typo = {
   H1_B: getTypo("heading1", fontWeights.BOLD),
-  H2_B: getTypo("heading1", fontWeights.BOLD),
-  H3_B: getTypo("heading1", fontWeights.BOLD),
+  H2_B: getTypo("heading2", fontWeights.BOLD),
+  H3_B: getTypo("heading3", fontWeights.BOLD),
   S1_B: getTypo("subtitle1", fontWeights.BOLD),
   S1_R: getTypo("subtitle1", fontWeights.REGULAR),
   S2_B: getTypo("subtitle2", fontWeights.BOLD),
