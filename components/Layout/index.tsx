@@ -14,7 +14,7 @@ const Layout = ({ children }: PropsWithChildren) => {
 const Main = styled.div`
   width: 100vw;
   height: 100vh;
-  padding-bottom: 72px;
+  padding-bottom: 7.2rem;
 `;
 
 export default Layout;

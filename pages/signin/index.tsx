@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
+import Typo from "../../components/Typo";
 import { AuthTokenPayload, WebViewMessageType } from "../types";
 import { sendMessage } from "../utils";
 
@@ -28,12 +29,25 @@ const SignIn = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        id
-        <input type="text" onChange={handleChangeId} />
-        pw
-        <input type="password" onChange={handleChangePw} />
-        <button type="submit">로그인</button>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        <Typo>id</Typo>
+        <input
+          type="text"
+          onChange={handleChangeId}
+          style={{ border: "1px solid black", width: "50%" }}
+        />
+        <Typo>pw</Typo>
+        <input
+          type="password"
+          onChange={handleChangePw}
+          style={{ border: "1px solid black", width: "50%" }}
+        />
+        <button type="submit">
+          <Typo>로그인</Typo>
+        </button>
       </form>
     </div>
   );

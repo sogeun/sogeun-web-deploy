@@ -31,9 +31,9 @@ const BottomTabNavigator = () => {
 
 const Container = styled.nav`
   width: 100%;
-  height: 72px;
+  height: 7.2rem;
   border-top: 1px solid gray;
-  padding: 20px;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   position: fixed;
@@ -42,14 +42,14 @@ const Container = styled.nav`
 `;
 
 const TabButton = styled.button`
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   border: 1px solid black;
 `;
 
 const AddButton = styled.button`
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   border: 1px solid black;
   border-radius: 50%;
 `;

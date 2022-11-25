@@ -26,8 +26,7 @@ export type FontWeightType = typeof fontWeights[keyof typeof fontWeights];
 
 const getTypo = (size: FontSizeType, weight: FontWeightType) => {
   const { fontSize, lineHeight, fontWeight } = getFontTypo(size, weight);
-
-  return `font-size: ${fontSize}px; line-height: ${lineHeight}px; font-weight: ${fontWeight}`;
+  return `font-size: ${fontSize}rem; line-height: ${lineHeight}rem; font-weight: ${fontWeight}`;
 };
 
 const getFontTypo: (
@@ -39,40 +38,40 @@ const getFontTypo: (
   fontWeight: number;
 } = (size, weight) => {
   const fontWeight = weight;
-  let fontSize = 16;
-  let lineHeight = 24;
+  let fontSize = 1.6;
+  let lineHeight = 2.4;
   switch (size) {
     case "heading1":
-      fontSize = 30;
-      lineHeight = 40;
+      fontSize = 3;
+      lineHeight = 4;
       break;
     case "heading2":
-      fontSize = 28;
-      lineHeight = 38;
+      fontSize = 2.8;
+      lineHeight = 3.8;
       break;
     case "heading3":
-      fontSize = 24;
-      lineHeight = 32;
+      fontSize = 2.4;
+      lineHeight = 3.2;
       break;
     case "subtitle1":
-      fontSize = 20;
-      lineHeight = 28;
+      fontSize = 2;
+      lineHeight = 2.8;
       break;
     case "subtitle2":
-      fontSize = 18;
-      lineHeight = 26;
+      fontSize = 1.8;
+      lineHeight = 2.6;
       break;
     case "body1":
-      fontSize = 16;
-      lineHeight = 24;
+      fontSize = 1.6;
+      lineHeight = 2.4;
       break;
     case "body2":
-      fontSize = 14;
-      lineHeight = 24;
+      fontSize = 1.4;
+      lineHeight = 2.4;
       break;
     case "body3":
-      fontSize = 12;
-      lineHeight = 20;
+      fontSize = 1.2;
+      lineHeight = 2;
       break;
     default:
       break;

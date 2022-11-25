@@ -1,6 +1,5 @@
-import { Fragment, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import { css } from "styled-components";
 import Typo, { TypoProps } from "../components/Typo";
 
 interface TypoWrapperProps {
