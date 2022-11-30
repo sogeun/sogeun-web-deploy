@@ -11,7 +11,7 @@ const MyPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <div>마이페이지에용</div>
+      <div>마이페이지</div>
       <div>이름 : {name}</div>
       <div>나이 : {age}</div>
       <div>주소 : {address}</div>
