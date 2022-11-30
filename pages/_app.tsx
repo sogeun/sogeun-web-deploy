@@ -37,7 +37,7 @@ function withWrapper(MainComponent: ({ Component, pageProps }: AppPropsWithLayou
             <RNListener>
               <MainComponent {...props} />
             </RNListener>
-            <ReactQueryDevtools />
+            <ReactQueryDevtools position={'top-right'} />
           </Hydrate>
         </QueryClientProvider>
       </ThemeProvider>
