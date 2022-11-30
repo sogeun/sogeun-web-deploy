@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
-import styled from "styled-components";
-import Layout from "../../components/Layout";
-import Typo from "../../components/Typo";
-import { NextPageWithLayout } from "../_app";
+import { ReactElement } from 'react';
+import styled from 'styled-components';
+import Layout from '../../components/Layout';
+import Typo from '../../components/Typo';
+import { NextPageWithLayout } from '../_app';
 
 const Home: NextPageWithLayout = () => {
   return (

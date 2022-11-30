@@ -1,14 +1,14 @@
-import { useRouter } from "next/router";
-import { ChangeEvent, FormEventHandler, useState } from "react";
-import styled from "styled-components";
-import pages from "../../constants/pages";
-import { AuthTokenPayload, WebViewMessageType } from "../types";
-import { sendMessage } from "../utils";
+import { useRouter } from 'next/router';
+import { ChangeEvent, FormEventHandler, useState } from 'react';
+import styled from 'styled-components';
+import pages from '../../constants/pages';
+import { AuthTokenPayload, WebViewMessageType } from '../../constants/types';
+import { sendMessage } from '../../utils/message';
 
 const SignIn = () => {
   const router = useRouter();
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
 
   const handleChangeId = (e: ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -24,7 +24,7 @@ const SignIn = () => {
     sendMessage<AuthTokenPayload>({
       type: WebViewMessageType.SIGN_IN,
       payload: {
-        token: "토큰",
+        token: '토큰',
       },
     });
   };
@@ -39,13 +39,13 @@ const SignIn = () => {
         <input
           type="text"
           onChange={handleChangeId}
-          style={{ border: "1px solid black", width: "50%" }}
+          style={{ border: '1px solid black', width: '50%' }}
         />
         pw
         <input
           type="password"
           onChange={handleChangePw}
-          style={{ border: "1px solid black", width: "50%" }}
+          style={{ border: '1px solid black', width: '50%' }}
         />
         <button type="submit">로그인</button>
       </Form>

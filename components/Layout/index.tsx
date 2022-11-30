@@ -1,6 +1,6 @@
-import { Fragment, PropsWithChildren } from "react";
-import styled from "styled-components";
-import BottomTabNavigator from "../BottomTabNavigator";
+import { Fragment, PropsWithChildren } from 'react';
+import styled from 'styled-components';
+import BottomTabNavigator from '../BottomTabNavigator';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (

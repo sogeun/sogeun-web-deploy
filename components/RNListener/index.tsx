@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import { Fragment, PropsWithChildren, useEffect, useState } from "react";
-import pages from "../../constants/pages";
-import { AuthTokenPayload, WebViewMessageType } from "../../pages/types";
-import { parseWebMessage, sendMessage } from "../../pages/utils";
+import { useRouter } from 'next/router';
+import { Fragment, PropsWithChildren, useEffect, useState } from 'react';
+import pages from '../../constants/pages';
+import { AuthTokenPayload, WebViewMessageType } from '../../constants/types';
+import { parseWebMessage, sendMessage } from '../../utils/message';
 
 const RNListener = ({ children }: PropsWithChildren) => {
   const [isSessionChecked, setIsSessionChecked] = useState(false);
@@ -28,14 +28,14 @@ const RNListener = ({ children }: PropsWithChildren) => {
     };
     //@ts-ignore
     if (window.ReactNativeWebView) {
-      document.addEventListener("message", listener);
+      document.addEventListener('message', listener);
       // ios
-      window.addEventListener("message", listener);
+      window.addEventListener('message', listener);
     }
     return () => {
-      document.removeEventListener("message", listener);
+      document.removeEventListener('message', listener);
       // ios
-      window.removeEventListener("message", listener);
+      window.removeEventListener('message', listener);
     };
   }, [router]);
 

@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
-import styled from "styled-components";
-import Typo, { TypoProps } from "../components/Typo";
+import { PropsWithChildren } from 'react';
+import styled from 'styled-components';
+import Typo, { TypoProps } from '../components/Typo';
 
 interface TypoWrapperProps {
   args: PropsWithChildren<TypoProps>[];

@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import styled from "styled-components";
-import { bottomTabList } from "../../constants";
-import strings from "../../constants/strings";
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { bottomTabList } from '../../constants';
+import strings from '../../constants/strings';
 
 const BottomTabNavigator = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const BottomTabNavigator = () => {
     };
 
     const handleAddButtonClick = () => {
-      window.alert("준비중");
+      window.alert('준비중');
     };
     if (v.title === strings.ADD) {
       return (

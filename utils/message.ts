@@ -1,4 +1,4 @@
-import { WebViewMessage } from "./types";
+import { WebViewMessage } from '../constants/types';
 
 export const sendMessage = <T>(message: WebViewMessage<T>) => {
   //@ts-ignore

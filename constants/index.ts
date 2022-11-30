@@ -1,5 +1,5 @@
-import pages from "./pages";
-import strings from "./strings";
+import pages from './pages';
+import strings from './strings';
 
 export const bottomTabList = [
   {
@@ -12,7 +12,7 @@ export const bottomTabList = [
   },
   {
     title: strings.ADD,
-    to: "",
+    to: '',
   },
   {
     title: strings.GROUP,
