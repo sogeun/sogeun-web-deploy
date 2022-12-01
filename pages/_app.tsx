@@ -3,11 +3,11 @@ import RNListener from '../components/RNListener';
 import { ReactElement, useRef } from 'react';
 import { NextPage } from 'next';
 import { ThemeProvider } from 'styled-components';
-import { appTheme } from '../constants/theme';
-import { GlobalStyle } from '../styles/globalStyle';
+import { appTheme } from '~/constants/theme';
+import { GlobalStyle } from '~/styles/globalStyle';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { queryClient } from '../react-query/queryClient';
+import { queryClient } from '~/react-query/queryClient';
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => JSX.Element;
