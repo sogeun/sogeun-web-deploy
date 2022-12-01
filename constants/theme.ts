@@ -29,11 +29,7 @@ const getTypo = (
   weight: FontWeightType,
   fontType = FontType.NOTO_SANS_CJK_KR,
 ) => {
-  const { fontFamily, fontSize, lineHeight, fontWeight } = getFontTypo(
-    size,
-    weight,
-    fontType,
-  );
+  const { fontFamily, fontSize, lineHeight, fontWeight } = getFontTypo(size, weight, fontType);
   return `font-family: ${fontFamily}; font-size: ${fontSize}rem; line-height: ${lineHeight}rem; font-weight: ${fontWeight}`;
 };
 
