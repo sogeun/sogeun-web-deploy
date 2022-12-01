@@ -8,6 +8,8 @@ import { GlobalStyle } from '~/styles/globalStyle';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClient } from '~/react-query/queryClient';
+import AxiosProvider from '~/network/AxiosProvider';
+import AuthProvider from '~/context/auth';
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => JSX.Element;
@@ -31,15 +33,19 @@ function withWrapper(MainComponent: ({ Component, pageProps }: AppPropsWithLayou
 
     return (
       <ThemeProvider theme={appTheme}>
-        <QueryClientProvider client={queryClientRef.current}>
-          <Hydrate state={props.pageProps.dehydratedState}>
-            <GlobalStyle />
-            <RNListener>
-              <MainComponent {...props} />
-            </RNListener>
-            <ReactQueryDevtools position={'top-right'} />
-          </Hydrate>
-        </QueryClientProvider>
+        <AuthProvider>
+          <AxiosProvider>
+            <QueryClientProvider client={queryClientRef.current}>
+              <Hydrate state={props.pageProps.dehydratedState}>
+                <RNListener>
+                  <GlobalStyle />
+                  <MainComponent {...props} />
+                  <ReactQueryDevtools position={'top-right'} />
+                </RNListener>
+              </Hydrate>
+            </QueryClientProvider>
+          </AxiosProvider>
+        </AuthProvider>
       </ThemeProvider>
     );
   };
