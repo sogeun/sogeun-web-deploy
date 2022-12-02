@@ -18,15 +18,15 @@ const AxiosProvider = ({ children }: AxiosProviderProps) => {
       }
       return config;
     },
-    (error: any) => {
+    (error) => {
       console.log(error);
       return Promise.reject(error);
     },
   );
 
   defaultInstance.interceptors.response.use(
-    async (response: any) => response,
-    async (e: any) => {
+    async (response) => response,
+    async (e) => {
       return Promise.reject(e);
     },
   );

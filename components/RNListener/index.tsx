@@ -3,13 +3,9 @@ import { Fragment, PropsWithChildren, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { requestSocialSignIn } from '~/apis/auth';
 import { useAuthActions } from '~/context/auth';
-import pages from '../../constants/pages';
-import {
-  AuthTokenPayload,
-  SocialSignInInfoPayload,
-  WebViewMessageType,
-} from '../../constants/types';
-import { parseWebMessage, sendMessage } from '../../utils/message';
+import pages from '~/constants/pages';
+import { AuthTokenPayload, SocialSignInInfoPayload, WebViewMessageType } from '~/constants/types';
+import { parseWebMessage, sendMessage } from '~/utils/message';
 
 const RNListener = ({ children }: PropsWithChildren) => {
   const { setToken, setUser } = useAuthActions();
