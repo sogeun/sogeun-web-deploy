@@ -35,7 +35,7 @@ const SignIn = () => {
       <h2>Typo Test Heading2</h2>
       <h3>Typo Test Heading3</h3>
       <Form onSubmit={handleSubmit}>
-        id
+        소근소근
         <input
           type="text"
           onChange={handleChangeId}
@@ -56,7 +56,7 @@ const SignIn = () => {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  ${({ theme }) => theme.typo.S1_B}
+  ${({ theme }) => theme.typo.B1_R_PC}
 `;
 
 export default SignIn;
