@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { Fragment, PropsWithChildren, useEffect, useState } from "react";
-import { useMutation } from "react-query";
 import { requestSocialSignIn } from "~/apis/auth";
-import { useAuthActions } from "~/context/auth";
+import { useAuthActions, useAuthState } from "~/context/auth";
 import pages from "~/constants/pages";
 import {
   AuthTokenPayload,
@@ -10,10 +9,18 @@ import {
   WebViewMessageType,
 } from "~/constants/types";
 import { parseWebMessage, sendMessage } from "~/utils/message";
+import { useMutation } from "react-query";
+import { ParsedStorage } from "~/utils/storage";
 
 const RNListener = ({ children }: PropsWithChildren) => {
+  const { user } = useAuthState();
   const { setToken, setUser } = useAuthActions();
   const [isSessionChecked, setIsSessionChecked] = useState(false);
+  const [tutorialCheck, setTutorialCheck] = useState({
+    isCheck: false,
+    isViewed: false,
+  });
+  const [isInitializeCheck, setIsInitializeCheck] = useState(false);
   const router = useRouter();
 
   const socialSignInMutation = useMutation(requestSocialSignIn, {
@@ -40,18 +47,6 @@ const RNListener = ({ children }: PropsWithChildren) => {
       const webData = event.data;
       const { type } = JSON.parse(webData);
       switch (type) {
-        case WebViewMessageType.SESSION_CHECK:
-          const { payload: authTokenPayload } =
-            parseWebMessage<AuthTokenPayload>(webData);
-          const { token } = authTokenPayload;
-          if (token) {
-            setToken(token);
-            router.replace(pages.HOME);
-          } else {
-            router.replace(pages.SIGN_IN);
-          }
-          setIsSessionChecked(true);
-          break;
         case WebViewMessageType.SOCIAL_SIGN_IN:
           const { payload: socialSignInPayload } =
             parseWebMessage<SocialSignInInfoPayload>(webData);
@@ -79,15 +74,64 @@ const RNListener = ({ children }: PropsWithChildren) => {
     };
   }, [router]);
 
-  // 이니셜라이즈 완료시
+  // 튜토리얼 체크
   useEffect(() => {
-    sendMessage({
-      type: WebViewMessageType.INITIALIZED,
-      payload: null,
-    });
-  }, [isSessionChecked]);
+    if (!tutorialCheck.isCheck && isSessionChecked) {
+      const isTutorialViewed = ParsedStorage.getItem("isTutorialViewed");
+      setTutorialCheck({ isCheck: true, isViewed: !!isTutorialViewed });
+    }
+  }, [router, tutorialCheck, isSessionChecked]);
 
-  // 로드 완료시
+  // 세션 체크
+  useEffect(() => {
+    if (!isSessionChecked) {
+      const authToken = ParsedStorage.getItem("authToken");
+      if (authToken?.token) {
+        // 세션 체크 요청 후
+        setUser({
+          name: "이름",
+          age: 29,
+          address: "서울",
+        });
+      } else {
+        // setUser({
+        //   name: "이름",
+        //   age: 29,
+        //   address: "서울",
+        // });
+      }
+      setIsSessionChecked(true);
+    }
+  }, [isSessionChecked, setToken, setUser]);
+
+  // 초기 라우팅
+  useEffect(() => {
+    if (!isInitializeCheck) {
+      if (tutorialCheck.isCheck && isSessionChecked) {
+        if (user) {
+          router.replace("/home");
+        } else {
+          if (tutorialCheck.isViewed) {
+            router.replace("/signin");
+          } else {
+            router.replace("/tutorial");
+          }
+        }
+        setIsInitializeCheck(true);
+      }
+    }
+  }, [user, tutorialCheck, isInitializeCheck, isSessionChecked, router]);
+
+  // // 이니셜라이즈 완료시
+  useEffect(() => {
+    if (isInitializeCheck) {
+      sendMessage({
+        type: WebViewMessageType.INITIALIZED,
+        payload: null,
+      });
+    }
+  }, [isInitializeCheck]);
+
   useEffect(() => {
     sendMessage({
       type: WebViewMessageType.WEB_LOADED,

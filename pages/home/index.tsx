@@ -1,4 +1,5 @@
-import { ReactElement } from "react";
+import { useRouter } from "next/router";
+import { ReactElement, useEffect } from "react";
 import styled from "styled-components";
 import { axiosUtils } from "~/network/axiosUtils";
 import defaultRequest from "~/network/defaultRequest";
@@ -7,6 +8,7 @@ import Typo from "../../components/Typo";
 import { NextPageWithLayout } from "../_app";
 
 const Home: NextPageWithLayout = () => {
+  const router = useRouter();
   const handleTestButtonClick = () => {
     try {
       defaultRequest({
@@ -20,6 +22,10 @@ const Home: NextPageWithLayout = () => {
       console.error(e);
     }
   };
+
+  useEffect(() => {
+    router.beforePopState(() => false);
+  }, [router]);
   return (
     <Container>
       <button onClick={handleTestButtonClick}>테스트 버튼</button>

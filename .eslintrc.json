@@ -11,6 +11,7 @@
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "no-case-declarations": "off",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "import/no-anonymous-default-export": "off"
   }
 }

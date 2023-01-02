@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import styled from "styled-components";
 import {
   SocialProvider,
@@ -30,6 +31,10 @@ const SignIn = () => {
       router.push(pages.HOME);
     }
   };
+
+  useEffect(() => {
+    router.beforePopState(() => false);
+  }, [router]);
 
   return (
     <div style={{ backgroundColor: "black" }}>

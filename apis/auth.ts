@@ -1,7 +1,7 @@
-import { SocialSignInInfoPayload, SocialSignInResult } from '~/constants/types';
-import { axiosUtils } from '~/network/axiosUtils';
-import defaultRequest from '~/network/defaultRequest';
-import { User } from '~/pages/api/signin';
+import { SocialSignInInfoPayload, SocialSignInResult } from "~/constants/types";
+import { axiosUtils } from "~/network/axiosUtils";
+import defaultRequest from "~/network/defaultRequest";
+import { User } from "~/pages/api/signin";
 
 export const requestSocialSignIn = async ({
   pId,
@@ -11,7 +11,7 @@ export const requestSocialSignIn = async ({
   try {
     const response = await defaultRequest<User>({
       method: axiosUtils.POST,
-      url: '/api/signin',
+      url: "/api/signin",
       requestBody: {
         pId,
         accessToken,
@@ -20,7 +20,7 @@ export const requestSocialSignIn = async ({
     });
 
     const { data } = response;
-    const token = 'temp Token';
+    const token = "temp Token";
     return {
       user: data,
       token,

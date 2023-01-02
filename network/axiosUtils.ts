@@ -3,8 +3,8 @@ import axios, {
   AxiosRequestConfig,
   AxiosRequestHeaders,
   AxiosResponse,
-} from 'axios';
-import qs from 'qs';
+} from "axios";
+import qs from "qs";
 
 export interface AxiosRequestParams {
   method: string;
@@ -15,15 +15,15 @@ export interface AxiosRequestParams {
 }
 
 export const axiosUtils = {
-  GET: 'get',
-  POST: 'post',
-  PUT: 'put',
-  DELETE: 'delete',
+  GET: "get",
+  POST: "post",
+  PUT: "put",
+  DELETE: "delete",
   AXIOS_CONFIG_DEFAULT: {
     timeout: 200000,
     paramsSerializer: {
       serialize: (params: Record<string, unknown>) =>
-        qs.stringify(params, { arrayFormat: 'brackets' }),
+        qs.stringify(params, { arrayFormat: "brackets" }),
     },
     withCredentials: true,
   },
@@ -35,7 +35,7 @@ export const request = async <T>(
   url: string,
   queryParams: unknown,
   requestBody: unknown,
-  headers?: AxiosRequestHeaders,
+  headers?: AxiosRequestHeaders
 ): Promise<AxiosResponse<T>> => {
   switch (method) {
     case axiosUtils.GET:
@@ -56,7 +56,7 @@ export const request = async <T>(
         headers,
       });
     default:
-      return Promise.reject(new Error('Invalid HttpMethod'));
+      return Promise.reject(new Error("Invalid HttpMethod"));
   }
 };
 
@@ -65,16 +65,16 @@ export class AppAxiosInstance {
 
   private instance: AxiosInstance | undefined;
 
-  constructor(type: 'main' | 'mock') {
+  constructor(type: "main" | "mock") {
     switch (type) {
-      case 'main':
-        this.baseURL = '';
+      case "main":
+        this.baseURL = "";
         break;
-      case 'mock':
-        this.baseURL = '';
+      case "mock":
+        this.baseURL = "";
         break;
       default:
-        this.baseURL = '';
+        this.baseURL = "";
     }
   }
 
@@ -95,4 +95,4 @@ export class AppAxiosInstance {
   };
 }
 
-export const defaultAxios = new AppAxiosInstance('main');
+export const defaultAxios = new AppAxiosInstance("main");

@@ -1,4 +1,4 @@
-import { AxiosRequestParams, defaultAxios, request } from './axiosUtils';
+import { AxiosRequestParams, defaultAxios, request } from "./axiosUtils";
 
 export default async <T>({
   method,

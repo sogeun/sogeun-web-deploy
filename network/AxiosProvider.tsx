@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import { useAuthState } from '~/context/auth';
-import { defaultAxios } from './axiosUtils';
+import React, { ReactNode } from "react";
+import { useAuthState } from "~/context/auth";
+import { defaultAxios } from "./axiosUtils";
 
 interface AxiosProviderProps {
   children: ReactNode;
@@ -21,14 +21,14 @@ const AxiosProvider = ({ children }: AxiosProviderProps) => {
     (error) => {
       console.log(error);
       return Promise.reject(error);
-    },
+    }
   );
 
   defaultInstance.interceptors.response.use(
     async (response) => response,
     async (e) => {
       return Promise.reject(e);
-    },
+    }
   );
   return <>{children}</>;
 };
