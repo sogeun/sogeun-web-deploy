@@ -3,6 +3,9 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
     html {
     font-size: 62.5%;
+    -webkit-touch-callout: none;
+    /* -webkit-user-select: none; */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 
     a {

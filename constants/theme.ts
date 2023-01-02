@@ -90,7 +90,7 @@ const getFontTypo: (
   return { fontFamily, fontSize, lineHeight, fontWeight };
 };
 
-const colors = {
+export const colors = {
   NEGATIVE1: "#FF3364",
   POSITIVE1: "#2B8CFF",
   GRAY1: "#2C2C2C",
@@ -105,7 +105,7 @@ const colors = {
   WHITE: "#FFFFFF",
 };
 
-const typo = {
+export const typo = {
   H1_B: getTypo("heading1", fontWeights.BOLD),
   H1_R: getTypo("heading1", fontWeights.REGULAR),
   H2_B: getTypo("heading2", fontWeights.BOLD),
@@ -136,9 +136,9 @@ export const appTheme = { colors, typo };
 
 export type Theme = typeof appTheme;
 
-export type ColorsType = keyof typeof colors;
+export type ColorsType = typeof colors[keyof typeof colors];
 
-export type TypoType = keyof typeof typo;
+export type TypoType = typeof typo[keyof typeof typo];
 
 declare module "styled-components" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
