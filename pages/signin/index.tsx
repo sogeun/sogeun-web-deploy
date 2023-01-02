@@ -1,33 +1,34 @@
 import { useRouter } from "next/router";
-import { ChangeEvent, FormEventHandler, useState } from "react";
 import styled from "styled-components";
+import {
+  SocialProvider,
+  SocialSignInPayload,
+  WebViewMessageType,
+} from "~/constants/types";
+import { useAuthActions } from "~/context/auth";
+import { sendMessage } from "~/utils/message";
 import Button from "../../components/Button";
 import pages from "../../constants/pages";
-import { AuthTokenPayload, WebViewMessageType } from "../types";
-import { sendMessage } from "../utils";
 
 const SignIn = () => {
   const router = useRouter();
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const { setToken } = useAuthActions();
 
-  const handleChangeId = (e: ChangeEvent<HTMLInputElement>) => {
-    setId(e.target.value);
-  };
-  const handleChangePw = (e: ChangeEvent<HTMLInputElement>) => {
-    setPw(e.target.value);
-  };
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    // 로그인 과정 끝낸 후
-    router.push(pages.HOME);
-    sendMessage<AuthTokenPayload>({
-      type: WebViewMessageType.SIGN_IN,
-      payload: {
-        token: "토큰",
-      },
-    });
+  const handleSocialSignIn = (provider: SocialProvider) => () => {
+    // @ts-ignore
+    if (window?.ReactNativeWebView) {
+      // 앱 소셜 로그인
+      sendMessage<SocialSignInPayload>({
+        type: WebViewMessageType.SOCIAL_SIGN_IN,
+        payload: {
+          provider,
+        },
+      });
+    } else {
+      // 웹 소셜 로그인
+      setToken("temp token");
+      router.push(pages.HOME);
+    }
   };
 
   return (

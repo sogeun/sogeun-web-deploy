@@ -1,11 +1,11 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { appTheme } from "../constants/theme";
 import { ThemeProvider } from "styled-components";
 import TypoWrapper from "./TypoWrapper";
 
 export default {
-  title: "Example/Typo",
+  title: "Typo",
   component: TypoWrapper,
   argTypes: {},
   decorators: [
