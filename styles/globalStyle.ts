@@ -18,19 +18,33 @@ export const GlobalStyle = createGlobalStyle`
     ${({ theme }) => theme.typo.H2_B}
   }
 
-  h3 {
-    ${({ theme }) => theme.typo.H3_B}
-  }
-
   @font-face {
-    font-family: NotoSansCJK-KR;
-    src: url('/fonts/NotoSansCJK-KR-Bold.otf');
+    font-family: Pretendard;
+    src: url('/fonts/Pretendard-Bold.otf');
     font-weight: 700;
   }
 
   @font-face {
-    font-family: NotoSansCJK-KR;
-    src: url('/fonts/NotoSansCJK-KR-Regular.otf');
+    font-family: Pretendard;
+    src: url('/fonts/Pretendard-SemiBold.otf');
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: Pretendard;
+    src: url('/fonts/Pretendard-Regular.otf');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: PyeongChang;
+    src: url('/fonts/PyeongChang-Bold.otf');
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: PyeongChang;
+    src: url('/fonts/PyeongChang-Regular.otf');
     font-weight: 400;
   }
 
