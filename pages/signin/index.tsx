@@ -7,12 +7,14 @@ import {
   WebViewMessageType,
 } from "~/constants/types";
 import { useAuthActions } from "~/context/auth";
+import useHistoryManager from "~/hooks/useHistoryManager";
 import { sendMessage } from "~/utils/message";
 import Button from "../../components/Button";
 import pages from "../../constants/pages";
 
 const SignIn = () => {
   const router = useRouter();
+  const history = useHistoryManager();
   const { setToken } = useAuthActions();
 
   const handleSocialSignIn = (provider: SocialProvider) => () => {
@@ -33,8 +35,8 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    router.beforePopState(() => false);
-  }, [router]);
+    history.disableGoBack();
+  }, [history]);
 
   return (
     <div style={{ backgroundColor: "black" }}>

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { ReactElement, useEffect } from "react";
 import styled from "styled-components";
+import useHistoryManager from "~/hooks/useHistoryManager";
 import { axiosUtils } from "~/network/axiosUtils";
 import defaultRequest from "~/network/defaultRequest";
 import Layout from "../../components/Layout";
@@ -9,6 +10,7 @@ import { NextPageWithLayout } from "../_app";
 
 const Home: NextPageWithLayout = () => {
   const router = useRouter();
+  const history = useHistoryManager();
   const handleTestButtonClick = () => {
     try {
       defaultRequest({
@@ -24,8 +26,8 @@ const Home: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    router.beforePopState(() => false);
-  }, [router]);
+    history.disableGoBack();
+  }, [history]);
   return (
     <Container>
       <button onClick={handleTestButtonClick}>테스트 버튼</button>
