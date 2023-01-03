@@ -10,7 +10,7 @@ import { useAuthActions } from "~/context/auth";
 import useHistoryManager from "~/hooks/useHistoryManager";
 import { sendMessage } from "~/utils/message";
 import Button from "../../components/Button";
-import pages from "../../constants/pages";
+import routes from "../../constants/routes";
 
 const SignIn = () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const SignIn = () => {
     } else {
       // 웹 소셜 로그인
       setToken("temp token");
-      router.push(pages.HOME);
+      router.push(routes.HOME);
     }
   };
 

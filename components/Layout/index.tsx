@@ -1,20 +1,19 @@
-import { Fragment, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import BottomTabNavigator from "../BottomTabNavigator";
+import { DeviceInfoPayload } from "~/constants/types";
+import { useCommonState } from "~/context/common";
 
 const Layout = ({ children }: PropsWithChildren) => {
-  return (
-    <Fragment>
-      <Main>{children}</Main>
-      <BottomTabNavigator />
-    </Fragment>
-  );
+  const { deviceInfo } = useCommonState();
+  return <StyledLayout deviceInfo={deviceInfo}>{children}</StyledLayout>;
 };
 
-const Main = styled.div`
-  width: 100vw;
-  height: 100vh;
-  padding-bottom: 7.2rem;
+const StyledLayout = styled.div<{ deviceInfo: DeviceInfoPayload | null }>`
+  padding: ${({ deviceInfo }) =>
+      deviceInfo?.platform === "ios"
+        ? `${deviceInfo.statusBarHeight / 10}rem`
+        : 0}
+    0;
 `;
 
 export default Layout;

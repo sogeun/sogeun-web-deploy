@@ -10,6 +10,12 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { queryClient } from "~/react-query/queryClient";
 import AxiosProvider from "~/network/AxiosProvider";
 import AuthProvider from "~/context/auth";
+import CommonProvider from "~/context/common";
+import { useRouter } from "next/router";
+import Background from "~/components/Background";
+import { ValueOf } from "~/constants/types";
+import routes from "~/constants/routes";
+import Layout from "~/components/Layout";
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<
   P,
@@ -31,6 +37,8 @@ function withWrapper(
   MainComponent: ({ Component, pageProps }: AppPropsWithLayout) => JSX.Element
 ) {
   return function MyApp(props: AppPropsWithLayout) {
+    const router = useRouter();
+    const { route } = router;
     const queryClientRef = useRef<QueryClient>();
     if (!queryClientRef.current) {
       queryClientRef.current = queryClient;
@@ -38,19 +46,24 @@ function withWrapper(
 
     return (
       <ThemeProvider theme={appTheme}>
-        <AuthProvider>
-          <AxiosProvider>
-            <QueryClientProvider client={queryClientRef.current}>
-              <Hydrate state={props.pageProps.dehydratedState}>
-                <RNListener>
-                  <GlobalStyle />
-                  <MainComponent {...props} />
-                  <ReactQueryDevtools position={"top-right"} />
-                </RNListener>
-              </Hydrate>
-            </QueryClientProvider>
-          </AxiosProvider>
-        </AuthProvider>
+        <CommonProvider>
+          <AuthProvider>
+            <AxiosProvider>
+              <QueryClientProvider client={queryClientRef.current}>
+                <Hydrate state={props.pageProps.dehydratedState}>
+                  <RNListener>
+                    <GlobalStyle />
+                    <Background route={route as ValueOf<typeof routes>} />
+                    <Layout>
+                      <MainComponent {...props} />
+                    </Layout>
+                    <ReactQueryDevtools position={"top-right"} />
+                  </RNListener>
+                </Hydrate>
+              </QueryClientProvider>
+            </AxiosProvider>
+          </AuthProvider>
+        </CommonProvider>
       </ThemeProvider>
     );
   };

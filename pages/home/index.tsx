@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
 import { ReactElement, useEffect } from "react";
 import styled from "styled-components";
+import Button from "~/components/Button";
+import routes from "~/constants/routes";
 import useHistoryManager from "~/hooks/useHistoryManager";
 import { axiosUtils } from "~/network/axiosUtils";
 import defaultRequest from "~/network/defaultRequest";
-import Layout from "../../components/Layout";
+import MainTabLayout from "../../components/MainTabLayout";
 import Typo from "../../components/Typo";
 import { NextPageWithLayout } from "../_app";
 
@@ -24,6 +26,7 @@ const Home: NextPageWithLayout = () => {
       console.error(e);
     }
   };
+  // router.push('/home/123');
 
   useEffect(() => {
     history.disableGoBack();
@@ -32,12 +35,13 @@ const Home: NextPageWithLayout = () => {
     <Container>
       <button onClick={handleTestButtonClick}>테스트 버튼</button>
       <Typo>메인페이지입니다.</Typo>
+      <Button onClick={() => router.push(routes.TUTORIAL)}>튜토리얼</Button>
     </Container>
   );
 };
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <MainTabLayout>{page}</MainTabLayout>;
 };
 
 const Container = styled.div``;

@@ -1,25 +1,25 @@
-import pages from './pages';
-import strings from './strings';
+import routes from "./routes";
+import strings from "./strings";
 
 export const bottomTabList = [
   {
     title: strings.HOME,
-    to: pages.HOME,
+    to: routes.HOME,
   },
   {
     title: strings.MAP,
-    to: pages.MAP,
+    to: routes.MAP,
   },
   {
     title: strings.ADD,
-    to: '',
+    to: "",
   },
   {
     title: strings.GROUP,
-    to: pages.GROUP,
+    to: routes.GROUP,
   },
   {
     title: strings.MY_PAGE,
-    to: pages.MY_PAGE,
+    to: routes.MY_PAGE,
   },
 ];

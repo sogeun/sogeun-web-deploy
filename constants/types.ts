@@ -6,6 +6,7 @@ export enum WebViewMessageType {
   SESSION_CHECK = "SESSION_CHECK",
   SOCIAL_SIGN_IN = "SOCIAL_SIGN_IN",
   SIGN_IN_COMPLETE = "SIGN_IN_COMPLETE",
+  DEVICE_INFO = "DEVICE_INFO",
 }
 
 export interface WebViewMessage<T> {
@@ -32,3 +33,12 @@ export interface SocialSignInResult {
   token: string;
   user: User;
 }
+
+export type Platform = "ios" | "android";
+
+export interface DeviceInfoPayload {
+  platform: Platform;
+  statusBarHeight: number;
+}
+
+export type ValueOf<T> = T[keyof T];

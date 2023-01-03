@@ -1,5 +1,11 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react';
-import { User } from '~/pages/api/signin';
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import { User } from "~/pages/api/signin";
 
 interface AuthContextType {
   user: User | null;
@@ -46,7 +52,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
         setToken(null);
       },
     }),
-    [],
+    []
   );
   return (
     <AuthActionsContext.Provider value={actions}>

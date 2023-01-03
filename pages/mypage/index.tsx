@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import Layout from "~/components/Layout";
+import MainTabLayout from "~/components/MainTabLayout";
 import { NextPageWithLayout } from "../_app";
 import { useMypageQuery } from "~/hooks/mypage/useMypage";
 import Button from "~/components/Button";
@@ -33,7 +33,7 @@ const MyPage: NextPageWithLayout = () => {
 };
 
 MyPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <MainTabLayout>{page}</MainTabLayout>;
 };
 
 export default MyPage;

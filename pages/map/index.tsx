@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import Layout from "../../components/Layout";
+import MainTabLayout from "../../components/MainTabLayout";
 import { NextPageWithLayout } from "../_app";
 
 const Map: NextPageWithLayout = () => {
@@ -7,7 +7,7 @@ const Map: NextPageWithLayout = () => {
 };
 
 Map.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <MainTabLayout>{page}</MainTabLayout>;
 };
 
 export default Map;

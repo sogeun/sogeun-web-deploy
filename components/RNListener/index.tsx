@@ -2,19 +2,22 @@ import { useRouter } from "next/router";
 import { Fragment, PropsWithChildren, useEffect, useState } from "react";
 import { requestSocialSignIn } from "~/apis/auth";
 import { useAuthActions, useAuthState } from "~/context/auth";
-import pages from "~/constants/pages";
+import routes from "~/constants/routes";
 import {
   AuthTokenPayload,
+  DeviceInfoPayload,
   SocialSignInInfoPayload,
   WebViewMessageType,
 } from "~/constants/types";
 import { parseWebMessage, sendMessage } from "~/utils/message";
 import { useMutation } from "react-query";
 import { ParsedStorage } from "~/utils/storage";
+import { useCommonActions } from "~/context/common";
 
 const RNListener = ({ children }: PropsWithChildren) => {
   const { user } = useAuthState();
   const { setToken, setUser } = useAuthActions();
+  const { setDeviceInfo } = useCommonActions();
   const [isSessionChecked, setIsSessionChecked] = useState(false);
   const [tutorialCheck, setTutorialCheck] = useState({
     isCheck: false,
@@ -34,7 +37,7 @@ const RNListener = ({ children }: PropsWithChildren) => {
         });
         setToken(res.token);
         setUser(res.user);
-        router.replace(pages.HOME);
+        router.replace(routes.HOME);
       }
     },
     onError: (e) => {
@@ -47,6 +50,11 @@ const RNListener = ({ children }: PropsWithChildren) => {
       const webData = event.data;
       const { type } = JSON.parse(webData);
       switch (type) {
+        case WebViewMessageType.DEVICE_INFO:
+          const { payload: deviceInfo } =
+            parseWebMessage<DeviceInfoPayload>(webData);
+          setDeviceInfo(deviceInfo);
+          break;
         case WebViewMessageType.SOCIAL_SIGN_IN:
           const { payload: socialSignInPayload } =
             parseWebMessage<SocialSignInInfoPayload>(webData);
@@ -109,12 +117,12 @@ const RNListener = ({ children }: PropsWithChildren) => {
     if (!isInitializeCheck) {
       if (tutorialCheck.isCheck && isSessionChecked) {
         if (user) {
-          router.replace("/home");
+          router.replace(routes.HOME);
         } else {
           if (tutorialCheck.isViewed) {
-            router.replace("/signin");
+            router.replace(routes.SIGN_IN);
           } else {
-            router.replace("/tutorial");
+            router.replace(routes.TUTORIAL);
           }
         }
         setIsInitializeCheck(true);
