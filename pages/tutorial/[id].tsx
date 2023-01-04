@@ -2,10 +2,12 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "~/components/Button";
 import routes from "~/constants/routes";
+import { useInterface } from "~/utils/interface";
 import { ParsedStorage } from "~/utils/storage";
 
 const TutorialPage = () => {
   const router = useRouter();
+  const { pushNavigation, replaceNavigation } = useInterface();
   const id = parseInt(router.query.id as string, 10);
 
   const isLast = id === tutorialList.length;
@@ -14,9 +16,9 @@ const TutorialPage = () => {
   const handleNext = () => {
     if (isLast) {
       ParsedStorage.setItem("isTutorialViewed", true);
-      router.replace(routes.SIGN_IN);
+      replaceNavigation(routes.SIGN_IN);
     } else {
-      router.replace(`${routes.TUTORIAL}/${id + 1}`);
+      pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
     }
   };
 
