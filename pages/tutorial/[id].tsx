@@ -2,10 +2,12 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "~/components/Button";
 import routes from "~/constants/routes";
+import { useInterface } from "~/utils/interface";
 import { ParsedStorage } from "~/utils/storage";
 
 const TutorialPage = () => {
   const router = useRouter();
+  const { pushNavigation, replaceNavigation } = useInterface();
   const id = parseInt(router.query.id as string, 10);
 
   const isLast = id === tutorialList.length;
@@ -14,17 +16,19 @@ const TutorialPage = () => {
   const handleNext = () => {
     if (isLast) {
       ParsedStorage.setItem("isTutorialViewed", true);
-      router.replace(routes.SIGN_IN);
+      replaceNavigation(routes.SIGN_IN);
     } else {
-      router.replace(`${routes.TUTORIAL}/${id + 1}`);
+      pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
     }
   };
 
   const handleSkip = () => {};
   return (
     <Container>
-      <Title>{matchedItem?.title}</Title>
-      <Desc>{matchedItem?.desc}</Desc>
+      <div>
+        <Title>{matchedItem?.title}</Title>
+        <Desc>{matchedItem?.desc}</Desc>
+      </div>
       <ButtonWrap>
         {isLast ? (
           <>
@@ -52,7 +56,10 @@ const TutorialPage = () => {
 };
 
 const Container = styled.main`
-  padding: 14rem 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14rem 2rem 4.2rem;
   height: 100%;
 `;
 
@@ -69,11 +76,7 @@ const Desc = styled.span`
 const ButtonWrap = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 0rem;
-  bottom: 2rem;
   width: 100%;
-  padding: 0 2rem;
   gap: 2.4rem;
 `;
 

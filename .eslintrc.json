@@ -12,6 +12,7 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "no-case-declarations": "off",
     "react/display-name": "off",
-    "import/no-anonymous-default-export": "off"
+    "import/no-anonymous-default-export": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
