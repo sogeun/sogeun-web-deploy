@@ -122,7 +122,7 @@ const RNListener = ({ children }: PropsWithChildren) => {
           if (tutorialCheck.isViewed) {
             router.replace(routes.SIGN_IN);
           } else {
-            router.replace(routes.TUTORIAL);
+            router.replace(`${routes.TUTORIAL}/1`);
           }
         }
         setIsInitializeCheck(true);
