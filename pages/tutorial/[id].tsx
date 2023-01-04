@@ -25,8 +25,10 @@ const TutorialPage = () => {
   const handleSkip = () => {};
   return (
     <Container>
-      <Title>{matchedItem?.title}</Title>
-      <Desc>{matchedItem?.desc}</Desc>
+      <div>
+        <Title>{matchedItem?.title}</Title>
+        <Desc>{matchedItem?.desc}</Desc>
+      </div>
       <ButtonWrap>
         {isLast ? (
           <>
@@ -54,7 +56,10 @@ const TutorialPage = () => {
 };
 
 const Container = styled.main`
-  padding: 14rem 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14rem 2rem 4.2rem;
   height: 100%;
 `;
 
@@ -71,11 +76,7 @@ const Desc = styled.span`
 const ButtonWrap = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 0rem;
-  bottom: 2rem;
   width: 100%;
-  padding: 0 2rem;
   gap: 2.4rem;
 `;
 
