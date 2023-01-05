@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { bottomTabList } from "../../constants";
+import { bottomTabList } from "~/constants";
 import strings from "../../constants/strings";
 
 const BottomTabNavigator = () => {
