@@ -1,3 +1,4 @@
+import { colors } from "./../constants/theme";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -6,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-touch-callout: none;
     /* -webkit-user-select: none; */
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    color: ${colors.WHITE}
     }
 
   a {

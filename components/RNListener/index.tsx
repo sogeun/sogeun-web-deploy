@@ -13,11 +13,13 @@ import { parseWebMessage, sendMessage } from "~/utils/message";
 import { useMutation } from "react-query";
 import { ParsedStorage } from "~/utils/storage";
 import { useCommonActions } from "~/context/common";
+import { useInterface } from "~/utils/interface";
 
 const RNListener = ({ children }: PropsWithChildren) => {
   const { user } = useAuthState();
   const { setToken, setUser } = useAuthActions();
   const { setDeviceInfo } = useCommonActions();
+  const { webLoaded, initializeComplete } = useInterface();
   const [isSessionChecked, setIsSessionChecked] = useState(false);
   const [tutorialCheck, setTutorialCheck] = useState({
     isCheck: false,
@@ -84,6 +86,8 @@ const RNListener = ({ children }: PropsWithChildren) => {
 
   // 튜토리얼 체크
   useEffect(() => {
+    if (router.pathname !== "/") return;
+    console.log(router);
     if (!tutorialCheck.isCheck && isSessionChecked) {
       const isTutorialViewed = ParsedStorage.getItem("isTutorialViewed");
       setTutorialCheck({ isCheck: true, isViewed: !!isTutorialViewed });
@@ -92,6 +96,7 @@ const RNListener = ({ children }: PropsWithChildren) => {
 
   // 세션 체크
   useEffect(() => {
+    if (router.pathname !== "/") return;
     if (!isSessionChecked) {
       const authToken = ParsedStorage.getItem("authToken");
       if (authToken?.token) {
@@ -110,10 +115,11 @@ const RNListener = ({ children }: PropsWithChildren) => {
       }
       setIsSessionChecked(true);
     }
-  }, [isSessionChecked, setToken, setUser]);
+  }, [isSessionChecked, setToken, setUser, router]);
 
   // 초기 라우팅
   useEffect(() => {
+    if (router.pathname !== "/") return;
     if (!isInitializeCheck) {
       if (tutorialCheck.isCheck && isSessionChecked) {
         if (user) {
@@ -122,7 +128,7 @@ const RNListener = ({ children }: PropsWithChildren) => {
           if (tutorialCheck.isViewed) {
             router.replace(routes.SIGN_IN);
           } else {
-            router.replace(routes.TUTORIAL);
+            router.replace(`${routes.TUTORIAL}/1`);
           }
         }
         setIsInitializeCheck(true);
@@ -130,21 +136,15 @@ const RNListener = ({ children }: PropsWithChildren) => {
     }
   }, [user, tutorialCheck, isInitializeCheck, isSessionChecked, router]);
 
-  // // 이니셜라이즈 완료시
+  // 이니셜라이즈 완료시
   useEffect(() => {
     if (isInitializeCheck) {
-      sendMessage({
-        type: WebViewMessageType.INITIALIZED,
-        payload: null,
-      });
+      initializeComplete();
     }
   }, [isInitializeCheck]);
 
   useEffect(() => {
-    sendMessage({
-      type: WebViewMessageType.WEB_LOADED,
-      payload: null,
-    });
+    webLoaded();
   }, []);
   return <Fragment>{children}</Fragment>;
 };

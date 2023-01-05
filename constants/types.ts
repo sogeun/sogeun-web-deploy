@@ -7,6 +7,9 @@ export enum WebViewMessageType {
   SOCIAL_SIGN_IN = "SOCIAL_SIGN_IN",
   SIGN_IN_COMPLETE = "SIGN_IN_COMPLETE",
   DEVICE_INFO = "DEVICE_INFO",
+  PUSH_NAVIGATION = "PUSH_NAVIGATION",
+  REPLACE_NAVIGATION = "REPLACE_NAVIGATION",
+  POP_NAVIGATION = "POP_NAVIGATION",
 }
 
 export interface WebViewMessage<T> {
@@ -39,6 +42,10 @@ export type Platform = "ios" | "android";
 export interface DeviceInfoPayload {
   platform: Platform;
   statusBarHeight: number;
+}
+
+export interface RoutePayload {
+  url: string;
 }
 
 export type ValueOf<T> = T[keyof T];
