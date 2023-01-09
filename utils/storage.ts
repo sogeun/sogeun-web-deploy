@@ -1,6 +1,7 @@
 export type ParsedStorageDataTypes = {
   authToken: { token: string };
   isTutorialViewed: boolean;
+  isSignupViewed: boolean;
 };
 
 export class ParsedStorage {

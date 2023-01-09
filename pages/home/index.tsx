@@ -9,6 +9,7 @@ import defaultRequest from "~/network/defaultRequest";
 import MainTabLayout from "../../components/MainTabLayout";
 import Typo from "../../components/Typo";
 import { NextPageWithLayout } from "../_app";
+import TextField from "~/components/TextField";
 
 const Home: NextPageWithLayout = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const Home: NextPageWithLayout = () => {
       <button onClick={handleTestButtonClick}>테스트 버튼</button>
       <Typo>메인페이지입니다.</Typo>
       <Button onClick={() => router.push(routes.TUTORIAL)}>튜토리얼</Button>
+      <TextField placeholder={"테스트"} label={"label"} />
     </Container>
   );
 };
