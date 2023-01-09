@@ -7,6 +7,7 @@ import {
   AuthTokenPayload,
   DeviceInfoPayload,
   SocialSignInInfoPayload,
+  SocialSignInResultPayload,
   WebViewMessageType,
 } from "~/constants/types";
 import { parseWebMessage, sendMessage } from "~/utils/message";
@@ -66,6 +67,11 @@ const RNListener = ({ children }: PropsWithChildren) => {
             accessToken,
             provider,
           });
+          break;
+        case WebViewMessageType.SOCIAL_SIGN_IN_RESULT:
+          const { payload: socialSignInResultPayload } =
+            parseWebMessage<SocialSignInResultPayload>(webData);
+          console.log(socialSignInResultPayload);
           break;
         default:
           break;

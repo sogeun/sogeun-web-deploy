@@ -1,5 +1,5 @@
 export default {
-  SIGN_IN: "signin",
+  SIGN_IN: "/signin",
   HOME: "/home",
   MAP: "/map",
   GROUP: "/group",

@@ -5,6 +5,7 @@ export enum WebViewMessageType {
   AUTH_TOKEN = "AUTH_TOKEN",
   SESSION_CHECK = "SESSION_CHECK",
   SOCIAL_SIGN_IN = "SOCIAL_SIGN_IN",
+  SOCIAL_SIGN_IN_RESULT = "SOCIAL_SIGN_IN_RESULT",
   SIGN_IN_COMPLETE = "SIGN_IN_COMPLETE",
   DEVICE_INFO = "DEVICE_INFO",
   PUSH_NAVIGATION = "PUSH_NAVIGATION",
@@ -32,11 +33,6 @@ export interface SocialSignInInfoPayload extends SocialSignInPayload {
   accessToken: string;
 }
 
-export interface SocialSignInResult {
-  token: string;
-  user: User;
-}
-
 export type Platform = "ios" | "android";
 
 export interface DeviceInfoPayload {
@@ -46,6 +42,14 @@ export interface DeviceInfoPayload {
 
 export interface RoutePayload {
   url: string;
+}
+
+export type SocialType = "kakao" | "google" | "apple";
+
+export interface SocialSignInResultPayload {
+  provider: SocialType;
+  accessToken: string;
+  pId: string;
 }
 
 export type ValueOf<T> = T[keyof T];
