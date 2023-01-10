@@ -103,7 +103,7 @@ export const colors = {
   GRAY8: "#EEF4FC",
   BLACK: "#000000",
   WHITE: "#FFFFFF",
-};
+} as const;
 
 export const typo = {
   H1_B: getTypo("heading1", fontWeights.BOLD),
@@ -130,15 +130,15 @@ export const typo = {
   B1_R_PC: getTypo("body1", fontWeights.REGULAR, FontType.PyeongChang),
   B2_B_PC: getTypo("body2", fontWeights.BOLD, FontType.PyeongChang),
   B2_R_PC: getTypo("body2", fontWeights.REGULAR, FontType.PyeongChang),
-};
+} as const;
 
 export const appTheme = { colors, typo };
 
 export type Theme = typeof appTheme;
 
-export type ColorsType = typeof colors[keyof typeof colors];
+export type ColorsType = keyof typeof colors;
 
-export type TypoType = typeof typo[keyof typeof typo];
+export type TypoType = keyof typeof typo;
 
 declare module "styled-components" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

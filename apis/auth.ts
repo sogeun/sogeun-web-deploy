@@ -1,29 +1,42 @@
-import { SocialSignInInfoPayload, SocialSignInResult } from "~/constants/types";
+import { SocialSignInInfoPayload } from "~/constants/types";
 import { axiosUtils } from "~/network/axiosUtils";
 import defaultRequest from "~/network/defaultRequest";
 import { User } from "~/pages/api/signin";
+
+export interface SignInResult {
+  user: User;
+  token: string;
+}
 
 export const requestSocialSignIn = async ({
   pId,
   accessToken,
   provider,
-}: SocialSignInInfoPayload): Promise<SocialSignInResult | undefined> => {
+}: SocialSignInInfoPayload): Promise<SignInResult | undefined> => {
   try {
-    const response = await defaultRequest<User>({
-      method: axiosUtils.POST,
-      url: "/api/signin",
-      requestBody: {
-        pId,
-        accessToken,
-        provider,
-      },
-    });
+    // const response = await defaultRequest<User>({
+    //   method: axiosUtils.POST,
+    //   url: "/api/signin",
+    //   requestBody: {
+    //     pId,
+    //     accessToken,
+    //     provider,
+    //   },
+    // });
+    // const { data } = response;
+    // const token = "temp Token";
+    // return {
+    //   user: data,
+    //   token,
+    // };
 
-    const { data } = response;
-    const token = "temp Token";
     return {
-      user: data,
-      token,
+      user: {
+        name: "임다빈",
+        age: 30,
+        address: "서울",
+      },
+      token: "temp Token",
     };
   } catch (e) {
     console.error(e);

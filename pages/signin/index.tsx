@@ -45,12 +45,7 @@ const SignIn = () => {
       <h3>Typo Test Heading3</h3>
       <Button onClick={handleSocialSignIn("google")}>구글 로그인</Button>
       <Button onClick={handleSocialSignIn("kakao")}>카카오 로그인</Button>
-      <Button onClick={handleSocialSignIn("apple")}>애플 로그인</Button>
-      <Button buttonType={"outline"} hasNextButton>
-        로그인
-      </Button>
-      <Button>로그인</Button>
-      <Button>로그인</Button>
+      {/* <Button onClick={handleSocialSignIn("apple")}>애플 로그인</Button> */}
     </div>
   );
 };

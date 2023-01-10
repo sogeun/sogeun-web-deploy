@@ -7,8 +7,8 @@ export const bottomTabList = [
     to: routes.HOME,
   },
   {
-    title: strings.MAP,
-    to: routes.MAP,
+    title: strings.CALENDAR,
+    to: routes.CALENDAR,
   },
   {
     title: strings.ADD,
