@@ -45,7 +45,7 @@ export function useInterface() {
   const popNavigation = () => {
     if (deviceInfo?.platform === "ios") {
       sendMessage<RoutePayload>({
-        type: WebViewMessageType.PUSH_NAVIGATION,
+        type: WebViewMessageType.POP_NAVIGATION,
         payload: { url: "" },
       });
     } else {

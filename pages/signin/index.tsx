@@ -43,20 +43,11 @@ const SignIn = () => {
       <h1>Typo Test Heading1</h1>
       <h2>Typo Test Heading2</h2>
       <h3>Typo Test Heading3</h3>
-      <Button>로그인</Button>
-      <Button buttonType={"outline"} hasNextButton>
-        로그인
-      </Button>
-      <Button>로그인</Button>
-      <Button>로그인</Button>
+      <Button onClick={handleSocialSignIn("google")}>구글 로그인</Button>
+      <Button onClick={handleSocialSignIn("kakao")}>카카오 로그인</Button>
+      {/* <Button onClick={handleSocialSignIn("apple")}>애플 로그인</Button> */}
     </div>
   );
 };
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  ${({ theme }) => theme.typo.B1_R_PC}
-`;
 
 export default SignIn;

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import styled, { CSSObject } from "styled-components";
-import { ColorsType, TypoType } from "../../constants/theme";
+import { colors, ColorsType, TypoType } from "../../constants/theme";
 
 export interface TypoProps {
   type: TypoType;
@@ -10,7 +10,7 @@ export interface TypoProps {
 
 const Typo = ({
   type = "B1_R",
-  color = "BLACK",
+  color = "WHITE",
   children,
   style,
 }: PropsWithChildren<Partial<TypoProps>>) => {

@@ -4,12 +4,11 @@ import { requestSocialSignIn } from "~/apis/auth";
 import { useAuthActions, useAuthState } from "~/context/auth";
 import routes from "~/constants/routes";
 import {
-  AuthTokenPayload,
   DeviceInfoPayload,
-  SocialSignInInfoPayload,
+  SocialSignInResultPayload,
   WebViewMessageType,
 } from "~/constants/types";
-import { parseWebMessage, sendMessage } from "~/utils/message";
+import { parseWebMessage } from "~/utils/message";
 import { useMutation } from "react-query";
 import { ParsedStorage } from "~/utils/storage";
 import { useCommonActions } from "~/context/common";
@@ -17,9 +16,9 @@ import { useInterface } from "~/utils/interface";
 
 const RNListener = ({ children }: PropsWithChildren) => {
   const { user } = useAuthState();
-  const { setToken, setUser } = useAuthActions();
+  const { setUser } = useAuthActions();
   const { setDeviceInfo } = useCommonActions();
-  const { webLoaded, initializeComplete } = useInterface();
+  const { webLoaded, initializeComplete, replaceNavigation } = useInterface();
   const [isSessionChecked, setIsSessionChecked] = useState(false);
   const [tutorialCheck, setTutorialCheck] = useState({
     isCheck: false,
@@ -29,19 +28,6 @@ const RNListener = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
   const socialSignInMutation = useMutation(requestSocialSignIn, {
-    onSuccess: (res) => {
-      if (res?.token) {
-        sendMessage<AuthTokenPayload>({
-          type: WebViewMessageType.SIGN_IN_COMPLETE,
-          payload: {
-            token: res.token,
-          },
-        });
-        setToken(res.token);
-        setUser(res.user);
-        router.replace(routes.HOME);
-      }
-    },
     onError: (e) => {
       // 404일때 회원가입 페이지로
     },
@@ -57,14 +43,16 @@ const RNListener = ({ children }: PropsWithChildren) => {
             parseWebMessage<DeviceInfoPayload>(webData);
           setDeviceInfo(deviceInfo);
           break;
-        case WebViewMessageType.SOCIAL_SIGN_IN:
-          const { payload: socialSignInPayload } =
-            parseWebMessage<SocialSignInInfoPayload>(webData);
-          const { provider, pId, accessToken } = socialSignInPayload;
-          socialSignInMutation.mutate({
-            pId,
-            accessToken,
-            provider,
+        case WebViewMessageType.SOCIAL_SIGN_IN_RESULT:
+          const { payload: socialSignInResultPayload } =
+            parseWebMessage<SocialSignInResultPayload>(webData);
+          socialSignInMutation.mutate(socialSignInResultPayload, {
+            onSuccess: (res) => {
+              if (!res) return;
+              ParsedStorage.setItem("authToken", { token: res.token });
+              setUser(res.user);
+              replaceNavigation(routes.HOME);
+            },
           });
           break;
         default:
@@ -115,7 +103,7 @@ const RNListener = ({ children }: PropsWithChildren) => {
       }
       setIsSessionChecked(true);
     }
-  }, [isSessionChecked, setToken, setUser, router]);
+  }, [isSessionChecked, setUser, router]);
 
   // 초기 라우팅
   useEffect(() => {

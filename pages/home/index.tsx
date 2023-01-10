@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import { ReactElement, useEffect } from "react";
 import styled from "styled-components";
-import Button from "~/components/Button";
-import routes from "~/constants/routes";
 import useHistoryManager from "~/hooks/useHistoryManager";
 import { axiosUtils } from "~/network/axiosUtils";
 import defaultRequest from "~/network/defaultRequest";
@@ -36,7 +34,6 @@ const Home: NextPageWithLayout = () => {
     <Container>
       <button onClick={handleTestButtonClick}>테스트 버튼</button>
       <Typo>메인페이지입니다.</Typo>
-      <Button onClick={() => router.push(routes.TUTORIAL)}>튜토리얼</Button>
       <TextField placeholder={"테스트"} label={"label"} />
     </Container>
   );
