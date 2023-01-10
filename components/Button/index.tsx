@@ -26,14 +26,14 @@ export interface ButtonProps {
 //   }
 // };
 
-const getTextColor = (type: ButtonType, disabled = false) => {
+const getTextColor = (type: ButtonType, disabled = false): ColorsType => {
   switch (type) {
     case "outline":
-      return disabled ? colors.GRAY3 : colors.WHITE;
+      return disabled ? "GRAY3" : "WHITE";
     case "filled":
-      return colors.BLACK;
+      return "BLACK";
     default:
-      return colors.BLACK;
+      return "BLACK";
   }
 };
 
@@ -84,7 +84,7 @@ const Button = ({
         <Icon
           icon={ArrowRight}
           height={25}
-          color={buttonType === "filled" ? colors.BLACK : colors.WHITE}
+          color={buttonType === "filled" ? "BLACK" : "WHITE"}
         />
       ) : null}
     </StyledButton>
@@ -105,7 +105,7 @@ const StyledButton = styled.button<{
   align-items: center;
   justify-content: ${({ hasNextButton }) =>
     hasNextButton ? "space-between" : "center"};
-  color: ${({ textColor }) => textColor};
+  color: ${({ theme, textColor }) => theme.colors[textColor]};
   background-color: ${({ backgroundColor }) => backgroundColor};
   font-size: ${({ theme }) => theme.typo.B2_SB};
   ${({ borderStyle }) => borderStyle};

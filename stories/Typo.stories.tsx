@@ -43,61 +43,19 @@ Heading.args = {
   ],
 };
 
-export const SubTitle = Template.bind({});
-
-SubTitle.args = {
-  args: [
-    {
-      type: "S1_B",
-      color: "BLACK",
-      children: "SubTitle1 Bold",
-    },
-    {
-      type: "S1_R",
-      color: "BLACK",
-      children: "SubTitle1 Regular",
-    },
-    {
-      type: "S2_B",
-      color: "BLACK",
-      children: "SubTitle2 Bold",
-    },
-    {
-      type: "S2_R",
-      color: "BLACK",
-      children: "SubTitle2 Regular",
-    },
-  ],
-};
-
 export const Body = Template.bind({});
 
 Body.args = {
   args: [
-    {
-      type: "B1_B",
-      color: "BLACK",
-      children: "Body1 Bold",
-    },
     {
       type: "B1_R",
       color: "BLACK",
       children: "Body1 Regular",
     },
     {
-      type: "B2_B",
-      color: "BLACK",
-      children: "Body2 Bold",
-    },
-    {
       type: "B2_R",
       color: "BLACK",
       children: "Body2 Regular",
-    },
-    {
-      type: "B3_B",
-      color: "BLACK",
-      children: "Body3 Bold",
     },
     {
       type: "B3_R",

@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorsType } from "~/constants/theme";
+import { colors, ColorsType } from "~/constants/theme";
 
 interface IconProps extends IconComponentProps {
   icon: React.FC<IconComponentProps>;
@@ -28,8 +28,8 @@ const withSVGProps =
   ) =>
   ({ width = 24, height = 24, color }: IconComponentProps) => {
     const colorProps = {
-      fill: colorType === "fill" ? color : "none",
-      stroke: colorType === "stroke" ? color : "none",
+      fill: colorType === "fill" && color ? colors[color] : "none",
+      stroke: colorType === "stroke" && color ? colors[color] : "none",
     };
     return (
       <Component
